@@ -368,11 +368,15 @@ class FileTest extends SapphireTest {
 		$member2->write();
 
 		$file1 = new File();
+		$filename1 = 'testfile1.txt';
+		$file1->Name = $filename1;
 		$file1->write();
 		$this->assertEquals(0, $file1->OwnerID, 'Owner not written when no user is logged in');
 
 		$member1->logIn();
 		$file2 = new File();
+		$filename2 = 'testfile2.txt';
+		$file2->Name = $filename2;
 		$file2->write();
 		$this->assertEquals($member1->ID, $file2->OwnerID, 'Owner written when user is logged in');
 
