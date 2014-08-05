@@ -274,7 +274,7 @@ class UploadTest extends SapphireTest {
 	
 	public function testUploadFileWithNoExtensionTwiceAppendsNumber() {
 		// create tmp file
-		$tmpFileName = 'UploadTest-testUpload';
+		$tmpFileName = 'UploadTest-testUpload.txt';
 		$tmpFilePath = TEMP_FOLDER . '/' . $tmpFileName;
 		$tmpFileContent = '';
 		for($i=0; $i<10000; $i++) $tmpFileContent .= '0';
@@ -294,7 +294,7 @@ class UploadTest extends SapphireTest {
 		$this->deleteTestUploadFiles("/UploadTest-testUpload.*/");
 
 		$v = new UploadTest_Validator();
-		$v->setAllowedExtensions(array(''));
+		//$v->setAllowedExtensions(array('txt'));
 
 		// test upload into default folder
 		$u = new Upload();
@@ -303,7 +303,7 @@ class UploadTest extends SapphireTest {
 		$file = $u->getFile();
 
 		$this->assertEquals(
-			'UploadTest-testUpload',
+			'UploadTest-testUpload.txt',
 			$file->Name,
 			'File is uploaded without extension'
 		);
@@ -313,7 +313,7 @@ class UploadTest extends SapphireTest {
 		$u->load($tmpFile);
 		$file2 = $u->getFile();
 		$this->assertEquals(
-			'UploadTest-testUpload-2',
+			'UploadTest-testUpload2.txt',
 			$file2->Name,
 			'File receives a number attached to the end'
 		);
@@ -324,7 +324,7 @@ class UploadTest extends SapphireTest {
 
 	public function testReplaceFile() {
 		// create tmp file
-		$tmpFileName = 'UploadTest-testUpload';
+		$tmpFileName = 'UploadTest-testUpload.txt';
 		$tmpFilePath = TEMP_FOLDER . '/' . $tmpFileName;
 		$tmpFileContent = '';
 		for($i=0; $i<10000; $i++) $tmpFileContent .= '0';
@@ -344,7 +344,7 @@ class UploadTest extends SapphireTest {
 		$this->deleteTestUploadFiles("/UploadTest-testUpload.*/");
 
 		$v = new UploadTest_Validator();
-		$v->setAllowedExtensions(array(''));
+		$v->setAllowedExtensions(array('txt'));
 
 		// test upload into default folder
 		$u = new Upload();
@@ -353,7 +353,7 @@ class UploadTest extends SapphireTest {
 		$file = $u->getFile();
 
 		$this->assertEquals(
-			'UploadTest-testUpload',
+			'UploadTest-testUpload.txt',
 			$file->Name,
 			'File is uploaded without extension'
 		);
@@ -364,7 +364,7 @@ class UploadTest extends SapphireTest {
 		$u->load($tmpFile);
 		$file2 = $u->getFile();
 		$this->assertEquals(
-			'UploadTest-testUpload',
+			'UploadTest-testUpload.txt',
 			$file2->Name,
 			'File does not receive new name'
 		);
@@ -401,6 +401,7 @@ class UploadTest extends SapphireTest {
 		$this->deleteTestUploadFiles("/UploadTest-testUpload.*/");
 
 		$v = new UploadTest_Validator();
+		$v->setAllowedExtensions(array('txt'));
 
 		// test upload into default folder
 		$u = new Upload();
