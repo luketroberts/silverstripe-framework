@@ -448,7 +448,7 @@ class UploadFieldTest extends FunctionalTest {
 		$response = $this->get($baseUrl . '/edit');
 		$this->assertFalse($response->isError());
 
-		$response = $this->post($baseUrl . '/EditForm', array('Title' => 'File 4 modified'));
+		$response = $this->post($baseUrl . '/EditForm', array('Title' => 'File 4 modified', 'Name' => $file4->Name ));
 		$this->assertFalse($response->isError());
 
 		$record = DataObject::get_by_id($record->class, $record->ID, false);
